@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azubu</title>
+
+    <link rel="stylesheet" href="public/css/main.css" type="text/css" />
+
+    <script src="public/js/functions.js"></script>
+    <script src="public/js/channels.js"></script>
+    <script src="public/js/jquery.min.js"></script>
+    <script src="public/js/main.js"></script>
+</head>
+<body>
+    <header>
+        <a href="#" id="azubu-logo"><img width="125px" src="public/images/azubu_logo.png" /></a>
+    </header>
+
+    <section id="add-user">
+        <input type="text" placeholder="Channel name" id="username" />
+        <input type="submit" value="Follow" id="add" style="margin-left: -3px;" />
+        <div id="error"></div>
+    </section>
+
+    <nav>
+        <li><a href="#" class="tab-link focus" data-tab="online">Online</a></li>
+        <li><a href="#" class="tab-link" data-tab="following">Following</a></li>
+        <div style="clear: both"></div>
+    </nav>
+
+    <main>
+        <section class="channels" id="online">
+            <div class="empty-msg">There's no online channels that you are following.</div>
+        </section>
+        <section class="channels" id="following" style="display: none">
+            <div class="empty-msg">You don't follow anyone.</div>
+        </section>
+        <div style="clear: both"></div>
+    </main>
+
+    <footer>
+    Created by <a href="#" id="my-tt">@gabrieljmj</a> - this is not an Azubu official extension
+    </footer>
+</body>
+</html>
