@@ -1,26 +1,4 @@
-chrome.browserAction.setBadgeText({text: "0"});
-//localStorage.removeItem('azubu_extension');
-if (!localStorage.getItem('azubu_extension')) {
-    localStorage.setItem('azubu_extension', '{"usernames": [], "online": []}');
-}
-
-setInterval(function () {
-    var extData = JSON.parse(localStorage.getItem('azubu_extension'));
-    var following = new Following(extData.usernames);
-    var online = new Online(extData.online);
-
-    for (var k in online.getAll()) {
-        if (!following.has(online.getAll()[k])) {
-            online.remove(online.getAll()[k]);
-        }
-    }
-}, 1000);
-
-var extData = JSON.parse(localStorage.getItem('azubu_extension'));
-    extData.online = [];
-    localStorage.setItem('azubu_extension', JSON.stringify(extData));
-
-setInterval(function () {
+function checkOnline () {
     var extData = JSON.parse(localStorage.getItem('azubu_extension'));
     var following = new Following(extData.usernames);
     var online = new Online(extData.online);
@@ -59,4 +37,32 @@ setInterval(function () {
     }
 
     chrome.browserAction.setBadgeText({text: "" + online.getAll().length + ""});
-}, 30000);
+}
+
+chrome.browserAction.setBadgeText({text: "0"});
+//localStorage.removeItem('azubu_extension');
+if (!localStorage.getItem('azubu_extension')) {
+    localStorage.setItem('azubu_extension', '{"usernames": [], "online": []}');
+}
+
+setInterval(function () {
+    var extData = JSON.parse(localStorage.getItem('azubu_extension'));
+    var following = new Following(extData.usernames);
+    var online = new Online(extData.online);
+
+    for (var k in online.getAll()) {
+        if (!following.has(online.getAll()[k])) {
+            online.remove(online.getAll()[k]);
+        }
+    }
+
+    chrome.browserAction.setBadgeText({text: "" + online.getAll().length + ""});
+}, 500);
+
+var extData = JSON.parse(localStorage.getItem('azubu_extension'));
+    extData.online = [];
+    localStorage.setItem('azubu_extension', JSON.stringify(extData));
+
+checkOnline();
+
+setInterval('checkOnline', 30000);
