@@ -12,9 +12,7 @@
         "notifications",
         "background",
         "storage",
-        "tabs",
-        "http://*/*",
-        "https://*/*"
+        "http://api.azubu.tv/*"
     ],
     "icons": {
       "128": "public/images/icons/128.png",

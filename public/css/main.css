@@ -95,3 +95,7 @@ a.remove-channel {
 div.empty-msg {
     padding: 10px;
 }
+
+#error {
+    margin-top: 5px;
+}
