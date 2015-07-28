@@ -116,17 +116,22 @@ window.onload = function () {
                 error('User not found: ' + username);
             } else {
                 following.add(userData.username);
+                var divToAdd = '<div><a href="http://azubu.tv/' + userData.username + '" class="channel" id="channel-link-' + userData.username + '">' + userData.username + '</a><a href="#" data-channel="' + userData.username + '" id="close-btn-' + userData.username + '" class="remove-channel">X</a></div>';
 
                 if (!(following.getAll().length - 1)) {
-                    followingList.innerHTML = '<div><a href="http://azubu.tv/' + userData.username + '" class="channel" id="channel-link-' + userData.username + '">' + userData.username + '</a><a href="#" data-channel="' + userData.username + '" id="close-btn-' + userData.username + '" class="remove-channel">X</a></div>';
+                    $('#following').html(divToAdd);
                 } else {
-                    followingList.innerHTML = followingList.innerHTML + '<div><a href="http://azubu.tv/' + userData.username + '" class="channel" id="channel-link-' + userData.username + '">' + userData.username + '</a><a href="#" data-channel="' + userData.username + '" id="close-btn-' + userData.username + '" class="remove-channel">X</a></div>';
+                    $('#following').append(divToAdd);
                 }
 
                 if (channel.isOnline()) {
-                    $('#online').append(
-                        '<a href="http://azubu.tv/' + userData.username + '" class="channel" id="on-channel-link-' + userData.username + '" style="width: 100%">' + userData.username + '</a>'
-                    );
+                    var divContent = '<a href="http://azubu.tv/' + userData.username + '" class="channel" id="on-channel-link-' + userData.username + '" style="width: 100%">' + userData.username + '</a>';
+                    
+                    if (!online.getAll().length) {
+                        $('#online').html(divContent);
+                    } else {
+                        $('#online').append(divContent);
+                    }
 
                     online.add(userData.username);
                 }
@@ -152,6 +157,10 @@ window.onload = function () {
             $('#channel-link-' + channel).remove();
             $('#on-channel-link-' + channel).remove();
             $('#close-btn-' + channel).remove();
+
+            if (online.has(channel)) {
+                online.remove(channel);
+            }
         }
     });
 
@@ -166,9 +175,12 @@ window.onload = function () {
 
                 if (channel.isOnline()) {
                     if (!online.has(channel.getName())) {
-                        $('#online').append(
-                            '<a href="http://azubu.tv/' + channel.getName() + '" class="channel" id="on-channel-link-' + channel.getName() + '" style="width: 100%">' + channel.getName() + '</a>'
-                        );
+                        var divContent = '<a href="http://azubu.tv/' + channel.getName() + '" class="channel" id="on-channel-link-' + channel.getName() + '" style="width: 100%">' + channel.getName() + '</a>';
+                        if (!online.getAll().length) {
+                            $('#online').html(divContent);
+                        } else {
+                            $('#online').append(divContent);
+                        }
 
                         online.add(channel.getName());
                     }

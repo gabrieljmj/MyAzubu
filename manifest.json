@@ -29,7 +29,7 @@
             "public/js/background.js"
         ]
     },
-    "version": "1.0.9",
+    "version": "1.0.10",
     "update_url": "https://clients2.google.com/service/update2/crx",
     "minimum_chrome_version": "30.0.0"
 }
