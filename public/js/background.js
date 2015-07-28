@@ -1,35 +1,36 @@
 function checkOnline () {
+    localStorage.setItem('azubu_extension_running', true);
     var extData = JSON.parse(localStorage.getItem('azubu_extension'));
     var following = new Following(extData.usernames);
     var online = new Online(extData.online);
 
     for (var k in following.getAll()) {
-        var username = following.getAll()[k];
+        var channel = following.getAll()[k];
 
         $.ajax({
             method: 'GET',
-            url:    'http://api.azubu.tv/public/channel/' + username + '/info',
+            url:    'http://api.azubu.tv/public/channel/' + channel + '/info',
             type:   'json',
             async:  false,
             success: function (data) {
                 if (data.data.is_live) {
-                    if (!online.has(username)) {
-                        var n = new Notification(username, {
+                    if (!online.has(channel)) {
+                        var n = new Notification(channel, {
                             tag: 'started streamming on Azubu.tv',
                             icon: data.data.url_thumbnail
                         });
 
                         n.onclick = function () {
-                            window.open('http://azubu.tv/' + username);      
+                            window.open('http://azubu.tv/' + channel);      
                         };
 
                         setTimeout(function () {n.close()}, 3000);
 
-                        online.add(username);
+                        online.add(channel);
                     }
                 } else {
-                    if (online.has(username)) {
-                        online.remove(username);
+                    if (online.has(channel)) {
+                        online.remove(channel);
                     }
                 }
             }
@@ -37,6 +38,7 @@ function checkOnline () {
     }
 
     chrome.browserAction.setBadgeText({text: "" + online.getAll().length + ""});
+    localStorage.removeItem('azubu_extension_running');
 }
 
 chrome.browserAction.setBadgeText({text: "0"});
@@ -63,6 +65,14 @@ var extData = JSON.parse(localStorage.getItem('azubu_extension'));
     extData.online = [];
     localStorage.setItem('azubu_extension', JSON.stringify(extData));
 
+/** 
+ * Run for the first time 
+*/
+localStorage.setItem('azubu_extension_running', true);
 checkOnline();
+localStorage.removeItem('azubu_extension_running');
 
-setInterval('checkOnline', 30000);
+/**
+ * Check what channels are online
+ */
+setInterval(function () { checkOnline() }, 30000);

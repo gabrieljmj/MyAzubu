@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Azubu</title>
+    <title>MyAzubu</title>
 
-    <link rel="stylesheet" href="public/css/main.css" type="text/css" />
+    <link rel="stylesheet" href="public/min/css/main.min.css" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="public/js/functions.js"></script>
-    <script src="public/js/channels.js"></script>
-    <script src="public/js/jquery.min.js"></script>
-    <script src="public/js/main.js"></script>
+    <script src="public/min/js/functions.min.js"></script>
+    <script src="public/min/js/channels.min.js"></script>
+    <script src="public/min/js/jquery.min.js"></script>
+    <script src="public/min/js/main.min.js"></script>
 </head>
 <body>
     <header>
-        <a href="#" id="azubu-logo"><img width="125px" src="public/images/azubu_logo.png" /></a>
+        <div id="refresh-icon">
+            <a href="#" id="refresh" title="Refresh"><i class="material-icons">refresh</i></a>
+        </div>
+        <div id="azubu-logo-div">
+            <a href="#" id="azubu-logo"><img width="125px" src="public/images/azubu_logo.png"></a>
+        </div>
     </header>
 
-    <section id="add-user">
-        <input type="text" placeholder="Channel name" id="username" />
-        <input type="submit" value="Follow" id="add" style="margin-left: -3px;" />
+    <article id="add-user">
+        <input type="text" placeholder="Channel name" id="username">
+        <input type="submit" value="Follow" id="add" style="margin-left: -3px;">
         <div id="error"></div>
-    </section>
+    </article>
 
     <nav>
         <li><a href="#" class="tab-link focus" data-tab="online">Online</a></li>
@@ -28,17 +34,17 @@
     </nav>
 
     <main>
-        <section class="channels" id="online">
+        <article class="channels" id="online">
             <div class="empty-msg">There's no online channels that you are following.</div>
-        </section>
-        <section class="channels" id="following" style="display: none">
+        </article>
+        <article class="channels" id="following" style="display: none">
             <div class="empty-msg">You don't follow anyone.</div>
-        </section>
+        </article>
         <div style="clear: both"></div>
     </main>
 
     <footer>
-    Created by <a href="#" id="my-tt">@gabrieljmj</a> - this is not an Azubu official extension
+        Created by <a href="#" id="my-tt">@gabrieljmj</a> - this is not an Azubu official extension
     </footer>
 </body>
 </html>

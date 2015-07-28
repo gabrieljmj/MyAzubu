@@ -1,9 +1,10 @@
-function array_contains(arr, value) {
-    for (var k in arr) {
-        if (arr[k] === value) {
+function array_contains (a, b) {
+    for (var c in a) {
+        if (a[c]===b) {
             return true;
         }
     }
 
     return false;
 }
+

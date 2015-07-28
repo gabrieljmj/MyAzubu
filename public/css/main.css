@@ -25,6 +25,13 @@ header {
     padding-top: 10px;
 }
 
+#refresh-icon {
+    width: 24px;
+    height: 24px;
+    float: left;
+    margin-left: 5px;
+}
+
 header, footer {
     text-align: center;
 }
@@ -68,9 +75,11 @@ a.channel, nav li a, a.remove-channel {
 a.channel:hover, nav li a.focus, nav li a:hover {
     background: #02172a;
 }
+
 a.remove-channel:hover {
     background: #cc0000;
 }
+
 a.channel {
     display: block;
     width: 205px;
