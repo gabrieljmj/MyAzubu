@@ -75,4 +75,4 @@ localStorage.removeItem('azubu_extension_running');
 /**
  * Check what channels are online
  */
-setInterval(function () { checkOnline() }, 30000);
+setInterval(function () { checkOnline(); }, 30000);
