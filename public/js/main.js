@@ -124,6 +124,13 @@ window.onload = function () {
                     $('#following').append(divToAdd);
                 }
 
+                document.getElementById('channel-link-' + userData.username).addEventListener('click', function () {
+                    chrome.tabs.create({
+                        url: 'http://azubu.tv/' + userData.username,
+                        active: true
+                    });
+                });
+
                 if (channel.isOnline()) {
                     var divContent = '<a href="http://azubu.tv/' + userData.username + '" class="channel" id="on-channel-link-' + userData.username + '" style="width: 100%">' + userData.username + '</a>';
                     
@@ -134,7 +141,25 @@ window.onload = function () {
                     }
 
                     online.add(userData.username);
+
+                    document.getElementById('on-channel-link-' + userData.username).addEventListener('click', function () {
+                        chrome.tabs.create({
+                            url: 'http://azubu.tv/' + userData.username,
+                            active: true
+                        });
+                    });
                 }
+
+                document.getElementById('close-btn-' + userData.username).addEventListener('click', function () {
+                    following.remove(userData.username);
+                    $('#channel-link-' + userData.username).remove();
+                    $('#on-channel-link-' + userData.username).remove();
+                    $('#close-btn-' + userData.username).remove();
+
+                    if (online.has(userData.username)) {
+                        online.remove(userData.username);
+                    }
+                });
 
                 usernameField.value = '';
             }
