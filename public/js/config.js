@@ -1,6 +1,20 @@
 $(document).ready(function () {
+    $('header #azubu-logo').on('click', function () {
+        chrome.tabs.create({
+            url: 'http://www.azubu.tv/',
+            active: true
+        });
+    });
+
+    $('footer #my-tt').on('click', function () {
+        chrome.tabs.create({
+            url: 'http://twitter.com/gabrieljmj',
+            active: true
+        });
+    });
+    
     var configs = JSON.parse(localStorage.getItem('azubu_extension_configs'));
-console.log(configs);
+
     if (configs.notifications.on) {
         $('#notification-on').prop('checked', true);
     }
