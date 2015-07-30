@@ -159,6 +159,10 @@ window.onload = function () {
                     if (online.has(userData.username)) {
                         online.remove(userData.username);
                     }
+
+                    if (!online.getAll().length) {
+                        $('#online').html('<div class="empty-msg">There\'s no online channels that you are following.</div>');
+                    }
                 });
 
                 usernameField.value = '';
@@ -185,6 +189,10 @@ window.onload = function () {
 
             if (online.has(channel)) {
                 online.remove(channel);
+            }
+
+            if (!online.getAll().length) {
+                $('#online').html('<div class="empty-msg">There\'s no online channels that you are following.</div>');
             }
         }
     });

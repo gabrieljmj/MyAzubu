@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MyAzubu - Configurations</title>
+
+    <link rel="stylesheet" href="public/min/css/main.min.css" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="public/min/js/jquery.min.js"></script>
+    <script src="public/min/js/functions.min.js"></script>
+    <script src="public/min/js/config.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav id="icons">
+            <a href="index.html" id="refresh" title="Back"><i class="material-icons">arrow_back</i></a>
+        </div>
+        </nav>
+        <div id="azubu-logo-div">
+            <a href="#" id="azubu-logo"><img width="125px" src="public/images/azubu_logo.png"></a>
+        </div>
+        <div style="clear: both"></div>
+    </header>
+
+    <main>
+        <section id="configs">
+            <article id="notifications" class="config">
+                <div class="title-box"><span class="title">Notifications</span></div>
+                <div class="field">
+                    <input type="checkbox" id="notification-on"><label for="notification-on">On</label>
+                </div>
+                <div class="field">
+                    <input type="checkbox" id="notification-sound"><label for="notification-sound">Sound</label>
+                </div>
+            </article>
+            <article id="refresh-interval" class="config">
+                <div class="title-box"><span class="title">Refresh Interval</span></div>
+                <div class="field">
+                    <select id="refresh-interval-time">
+                        <option value="30000">30 seconds</option>
+                        <option value="60000">1 minute</option>
+                        <option value="300000">5 minutes</option>
+                        <option value="3000000">10 minutes</option>
+                        <option value="30000000">30 minutes</option>
+                        <option value="60000000">1 hour</option>
+                    </select>
+                </div>
+            </article>
+        </section>
+    </main>
+</body>
+</html>

@@ -4,13 +4,14 @@ body {
     margin: 0px;
     width: 255px;
     list-style: none;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-input {
+input, select {
     padding: 5px;
 }
 
-input[type="text"] {
+input[type="text"], select {
     border: 2px solid #fff;
 }
 
@@ -25,11 +26,11 @@ header {
     padding-top: 10px;
 }
 
-#refresh-icon {
-    width: 24px;
+nav#icons {
+    min-width: 24px;
     height: 24px;
-    float: left;
-    margin-left: 5px;
+    float: right;
+    margin-right: 5px;
 }
 
 header, footer {
@@ -55,7 +56,7 @@ a:hover {
     width: 100%;
 }
 
-nav li a {
+nav#sections li a {
     width: 107.5px;
     float: left;
     text-align: center;
@@ -65,14 +66,14 @@ a.remove-channel {
     text-align: center;
 }
 
-a.channel, nav li a, a.remove-channel {
+a.channel, nav#sections li a, a.remove-channel {
     padding: 10px;
     background: #000;
     color: #fff;
     text-decoration: none;
 }
 
-a.channel:hover, nav li a.focus, nav li a:hover {
+a.channel:hover, nav#sections li a.focus, nav#sections li a:hover {
     background: #02172a;
 }
 
@@ -98,4 +99,22 @@ div.empty-msg {
 
 #error {
     margin-top: 5px;
+}
+
+main #configs {
+    padding: 10px;
+}
+
+main #configs .config .title {
+    font-size: 20px;
+}
+
+header #azubu-logo-div {
+    margin-top: -5px;
+    margin-left: 10px;
+    float: left;
+}
+
+.title-box {
+    margin-bottom: 5px;
 }

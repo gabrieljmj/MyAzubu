@@ -7,4 +7,3 @@ function array_contains (a, b) {
 
     return false;
 }
-
