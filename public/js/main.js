@@ -103,7 +103,7 @@ window.onload = function () {
     if (following.getAll().length) document.getElementById('following').innerHTML = followingDiv.join('');
 
     addBtn.addEventListener('click', function () {
-        hideErrors();
+        hideMsgs();
         var usernameField = document.getElementById('username');
         var username = usernameField.value;
         
@@ -113,7 +113,7 @@ window.onload = function () {
             var followingList = document.getElementById('following');
 
             if (!userData) {
-                error('User not found: ' + username);
+                msg('User not found: ' + username);
             } else {
                 following.add(userData.username);
                 var divToAdd = '<div><a href="http://azubu.tv/' + userData.username + '" class="channel" id="channel-link-' + userData.username + '">' + userData.username + '</a><a href="#" data-channel="' + userData.username + '" id="close-btn-' + userData.username + '" class="remove-channel">X</a></div>';
@@ -151,6 +151,7 @@ window.onload = function () {
                 }
 
                 document.getElementById('close-btn-' + userData.username).addEventListener('click', function () {
+                    hideMsgs();
                     following.remove(userData.username);
                     $('#channel-link-' + userData.username).remove();
                     $('#on-channel-link-' + userData.username).remove();
@@ -163,9 +164,15 @@ window.onload = function () {
                     if (!online.getAll().length) {
                         $('#online').html('<div class="empty-msg">There\'s no online channels that you are following.</div>');
                     }
+
+                    msg('<b>' + userData.username + '</b> unfollowed successfully!');
+                    setTimeout(function () { hideMsgs(); }, 3000);
                 });
 
                 usernameField.value = '';
+
+                msg('<b>' + userData.username + '</b> followed successfully!');
+                setTimeout(function () { hideMsgs(); }, 3000);
             }
         } else {
             usernameField.value = '';
@@ -180,6 +187,7 @@ window.onload = function () {
     });
 
     $('.remove-channel').on('click', function () {
+        hideMsgs();
         var channel = $(this).attr('data-channel');
         if (following.has(channel)) {
             following.remove(channel);
@@ -194,6 +202,9 @@ window.onload = function () {
             if (!online.getAll().length) {
                 $('#online').html('<div class="empty-msg">There\'s no online channels that you are following.</div>');
             }
+
+            msg('<b>' + channel + '</b> unfollowed successfully!');
+            setTimeout(function () { hideMsgs(); }, 3000);
         }
     });
 
@@ -249,16 +260,16 @@ function userExists(username) {
     return data;
 }
 
-function error(error) {
-    var div = document.getElementById('error');
+function msg(msg) {
+    var div = document.getElementById('msg');
     div.style.display = 'none';
     div.innerHTML = '';
     div.style.display = 'block';
-    div.innerHTML = error;
+    div.innerHTML = msg;
 }
 
-function hideErrors() {
-    var div = document.getElementById('error');
+function hideMsgs() {
+    var div = document.getElementById('msg');
     div.style.display = 'none';
     div.innerHTML = '';
 }

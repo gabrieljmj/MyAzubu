@@ -97,8 +97,9 @@ div.empty-msg {
     padding: 10px;
 }
 
-#error {
+#msg {
     margin-top: 5px;
+    display: none;
 }
 
 main #configs {
