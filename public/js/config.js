@@ -23,6 +23,10 @@ $(document).ready(function () {
         $('#notification-sound').prop('checked', true);
     }
 
+    if (configs.oldschool.on) {
+        $('#old-school').prop('checked', true);
+    }
+
     $('#refresh-interval-time').val(configs.refresh.interval);
 
     function setConfig (name, value) {
@@ -54,6 +58,12 @@ $(document).ready(function () {
         if ($.inArray(chooseTime, validTimes)) {
             setConfig('refresh.interval', chooseTime);
         }
+    });
+
+    $('#old-school').on('click', function () {
+        var on = $(this).is(':checked');
+
+        setConfig('oldschool.on', on);
     });
 });
 
