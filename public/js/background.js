@@ -37,7 +37,7 @@ function checkOnline (first) {
                                 window.open('http://azubu.tv/' + channel);      
                             };
 
-                            setTimeout(function () {n.close()}, 3000);
+                            setTimeout(function () {n.close()}, 6000);
                         }
                     }
                 } else {
