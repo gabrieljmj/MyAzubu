@@ -60,7 +60,7 @@ function checkOnline (first) {
 chrome.browserAction.setBadgeText({text: "0"});
 
 //localStorage.removeItem('azubu_extension');
-localStorage.removeItem('azubu_extension_configs');
+//localStorage.removeItem('azubu_extension_configs');
 
 if (!localStorage.getItem('azubu_extension')) {
     localStorage.setItem('azubu_extension', JSON.stringify({
