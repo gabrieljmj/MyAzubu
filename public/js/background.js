@@ -32,9 +32,10 @@ function checkOnline (first) {
                             }
 
                             var n = new Notification(channel, notificationOptions);
+                            var uri = 'http://azubu.tv/' + channel;
 
                             n.onclick = function () {
-                                window.open('http://azubu.tv/' + channel);      
+                                window.open(uri);      
                             };
 
                             setTimeout(function () {n.close()}, 6000);
