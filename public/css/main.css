@@ -87,6 +87,10 @@ a.channel {
     float: left;
 }
 
+a.channel .live-playing {
+    color: #e8e8e8;
+}
+
 a.remove-channel {
     width: 10px;
     float: right;
@@ -119,3 +123,4 @@ header #azubu-logo-div {
 .title-box {
     margin-bottom: 5px;
 }
+

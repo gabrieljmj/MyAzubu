@@ -58,6 +58,15 @@ window.onload = function () {
     var oldschool = !configs.oldschool.on ? '' : 'oldschool.';
     var AZUBU_URL = 'http://' + oldschool + 'azubu.com';
 
+    function getOnlineChannelDiv(channel) {
+        var stream = getStreamData(channel);
+        
+        return '<a href="' + AZUBU_URL + '/' + channel + '" class="channel" id="on-channel-link-' + channel + '" style="width: 100%">' + 
+                    '<div class="live-channel"><b>' + channel + '</b></div>' +
+                    '<div class="live-playing">playing <b>' + stream.category.title + '</b> - <small>' + stream.view_count + ' viwers</small></div>' +
+                '</a>';
+    }
+
     $('#azubu-logo').on('click', function () {
         chrome.tabs.create({
             url: 'http://www.azubu.tv/',
@@ -96,7 +105,7 @@ window.onload = function () {
     var addBtn = document.getElementById('add');
 
     for (var k in online.getAll()) {
-        onlineDiv.push('<a href="' + AZUBU_URL + '/' + online.getAll()[k] + '" class="channel" id="on-channel-link-' + online.getAll()[k] + '" style="width: 100%">' + online.getAll()[k] + '</a>');
+        onlineDiv.push(getOnlineChannelDiv(online.getAll()[k]));
     }
 
     for (var k in following.getAll()) {
@@ -136,7 +145,7 @@ window.onload = function () {
                 });
 
                 if (channel.isOnline()) {
-                    var divContent = '<a href="' + AZUBU_URL + '/' + userData.username + '" class="channel" id="on-channel-link-' + userData.username + '" style="width: 100%">' + userData.username + '</a>';
+                    var divContent = getOnlineChannelDiv(channel.getName());
                     
                     if (!online.getAll().length) {
                         $('#online').html(divContent);
@@ -223,7 +232,8 @@ window.onload = function () {
 
                 if (channel.isOnline()) {
                     if (!online.has(channel.getName())) {
-                        var divContent = '<a href="' + AZUBU_URL + '/' + channel.getName() + '" class="channel" id="on-channel-link-' + channel.getName() + '" style="width: 100%">' + channel.getName() + '</a>';
+                        var divContent = getOnlineChannelDiv(channel.getName());
+
                         if (!online.getAll().length) {
                             $('#online').html(divContent);
                         } else {
@@ -276,4 +286,20 @@ function hideMsgs() {
     var div = document.getElementById('msg');
     div.style.display = 'none';
     div.innerHTML = '';
+}
+
+function getStreamData(channel) {
+    var allData;
+
+    $.ajax({
+        method: 'GET',
+        url:    'http://api.azubu.tv/public/channel/' + channel + '/info',
+        type:   'json',
+        async:  false,
+        success: function (data) {
+            allData = data.data;
+        }
+    });
+
+    return allData;
 }
