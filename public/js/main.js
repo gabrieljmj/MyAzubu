@@ -289,7 +289,7 @@ function hideMsgs() {
 }
 
 function getStreamData(channel) {
-    var allData;
+    /*var allData;
 
     $.ajax({
         method: 'GET',
@@ -301,5 +301,8 @@ function getStreamData(channel) {
         }
     });
 
-    return allData;
+    return allData;*/
+
+    var allData = JSON.parse(localStorage.getItem('azubu_channels_info'));
+    return allData[channel];
 }

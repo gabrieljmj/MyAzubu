@@ -1,9 +1,19 @@
 function checkOnline (first) {
     localStorage.setItem('azubu_extension_running', true);
-    var extData = JSON.parse(localStorage.getItem('azubu_extension'));
-    var following = new Following(extData.usernames);
-    var online = new Online(extData.online);
-    var configs = JSON.parse(localStorage.getItem('azubu_extension_configs'));
+    var extData = JSON.parse(localStorage.getItem('azubu_extension')),
+        following = new Following(extData.usernames),
+        online = new Online(extData.online),
+        configs = JSON.parse(localStorage.getItem('azubu_extension_configs')),
+        channelsInfo = {};
+    localStorage.removeItem('azubu_channels_info');
+
+    for (var k in following.getAll()) {
+        var channel = following.getAll()[k];
+
+        channelsInfo[channel] = {};
+    }
+
+    localStorage.setItem('azubu_channels_info', JSON.stringify(channelsInfo));
 
     for (var k in following.getAll()) {
         var channel = following.getAll()[k];
@@ -14,6 +24,8 @@ function checkOnline (first) {
             type:   'json',
             async:  false,
             success: function (data) {
+                setChannelInfo(channel, data.data);
+
                 if (data.data.is_live) {
                     if (!online.has(channel)) {
                         online.add(channel);
@@ -56,6 +68,12 @@ function checkOnline (first) {
 
     chrome.browserAction.setBadgeText({text: "" + online.getAll().length + ""});
     localStorage.removeItem('azubu_extension_running');
+}
+
+function setChannelInfo (channel, data) {
+    var all = JSON.parse(localStorage.getItem('azubu_channels_info'));
+    all[channel] = data;
+    localStorage.setItem('azubu_channels_info', JSON.stringify(all));
 }
 
 chrome.browserAction.setBadgeText({text: "0"});
