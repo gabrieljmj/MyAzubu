@@ -55,8 +55,8 @@ window.onload = function () {
     }
 
     var configs = JSON.parse(localStorage.getItem('azubu_extension_configs'));
-    var oldschool = !configs.oldschool.on ? '' : 'oldschool.';
-    var AZUBU_URL = 'http://' + oldschool + 'azubu.com';
+    var oldschool = !configs.oldschool.on ? '' : 'usw2.';
+    var AZUBU_URL = 'http://www.' + oldschool + 'azubu.com';
 
     function getOnlineChannelDiv(channel) {
         var stream = getStreamData(channel);
